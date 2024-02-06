@@ -2,7 +2,8 @@ const requestGoogleApi = async (range) => {
   const baseUrl =
     "https://sheets.googleapis.com/v4/spreadsheets/1aNaURa2_ZgKDd8ANxhAi2ich_g28YIooQ3TZJcQFiME/values";
   const keyApi = "AIzaSyDJANNdaB9XBpMiXyUF-UhyM9Q0-f1L9sU";
-  const res = await fetch(`${baseUrl}/${range}?key=${keyApi}`);
+  const endpoint = `${baseUrl}/${range}?key=${keyApi}`;
+  const res = await fetch(endpoint, { cache: "no-store" });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
