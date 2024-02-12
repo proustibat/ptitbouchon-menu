@@ -63,27 +63,18 @@ export const requestHappyHour = async () => {
   };
 };
 
-export const requestDrinksWithAlcohol = async () => {
+export const requestDrinks = async (sheet) => {
   const categoriesResult = (
-    await requestGoogleApi("'drinking-with-alcohol'!A3:C1000")
+    await requestGoogleApi(`'${sheet}'!A3:C1000`)
   ).values.map(([fr, en, range]) => {
     return { fr, en, range };
   });
 
-  // console.log(categoriesResult[0]);
-
-  // const lists = await requestGoogleApi(
-  //   `'drinking-with-alcohol'!${categoriesResult[0].range}`,
-  // );
-
   const allListsRequest = categoriesResult
     .filter(({ range }) => range !== undefined)
     .map(async ({ range }) => {
-      console.log(range);
-      return await requestGoogleApi(`'drinking-with-alcohol'!${range}`);
+      return await requestGoogleApi(`'${sheet}'!${range}`);
     });
-
-  // console.log(allListsRequest);
 
   const lists = await Promise.all(allListsRequest);
 
