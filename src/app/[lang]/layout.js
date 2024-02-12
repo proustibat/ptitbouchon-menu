@@ -4,9 +4,9 @@ import "./globals.css";
 import Link from "next/link";
 import LocaleSwitcher from "@/app/[lang]/components/LocaleSwitcher";
 import { useRouter, usePathname } from "next/navigation";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const lora = Lora({ subsets: ["latin"] });
-
 // export const metadata = {
 //   title: "La carte du P'tit Bouchon",
 // };
@@ -32,6 +32,7 @@ export default function RootLayout({ children, params: { lang } }) {
         <meta charSet="UTF-8" />
       </head>
       <body className={`${lora.className}`}>
+        <SpeedInsights />
         <nav className="bg-slate-700 p-5 sticky top-0 z-10 flex flex-row">
           <div
             onClick={handleBack}
