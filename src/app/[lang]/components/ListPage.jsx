@@ -8,7 +8,7 @@ const ListPage = async ({ lang, sheetName }) => {
   return (
     <>
       {listData.map((item) => {
-        let hasSeveralPrices = item.list[0].length === 5;
+        let hasSeveralPrices = item.list[0].length === 6;
         let drinksList = item.list;
         let pricesTitles;
         if (hasSeveralPrices) {
@@ -30,14 +30,20 @@ const ListPage = async ({ lang, sheetName }) => {
             )}
             <List>
               {drinksList.map((drink) => {
+                let info;
+                if (drink.length === 6) {
+                  info = drink[4];
+                } else {
+                  info = lang === "fr" ? drink[3] : drink[4];
+                }
                 return (
                   <ListItem
                     key={`${item[lang]}-${drink[lang === "fr" ? 0 : 1]}`}
                     title={drink[lang === "fr" ? 0 : 1]}
                     prices={
-                      drink.length === 5 ? [drink[2], drink[3]] : [drink[2]]
+                      drink.length === 6 ? [drink[2], drink[3]] : [drink[2]]
                     }
-                    info={drink.length === 5 ? drink[4] : drink[3]}
+                    info={info}
                   />
                 );
               })}

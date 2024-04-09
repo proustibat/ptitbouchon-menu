@@ -65,7 +65,7 @@ export const requestHappyHour = async () => {
 
 export const requestDrinks = async (sheet) => {
   const categoriesResult = (
-    await requestGoogleApi(`'${sheet}'!A3:C1000`)
+    await requestGoogleApi(`'${sheet}'!A3:C1000`).catch(console.log)
   ).values.map(([fr, en, range]) => {
     return { fr, en, range };
   });
@@ -73,7 +73,7 @@ export const requestDrinks = async (sheet) => {
   const allListsRequest = categoriesResult
     .filter(({ range }) => range !== undefined)
     .map(async ({ range }) => {
-      return await requestGoogleApi(`'${sheet}'!${range}`);
+      return await requestGoogleApi(`'${sheet}'!${range}`).catch(console.log);
     });
 
   const lists = await Promise.all(allListsRequest);

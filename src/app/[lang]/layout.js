@@ -22,6 +22,10 @@ export default function RootLayout({ children, params: { lang } }) {
     router.back();
   };
 
+  const goHome = () => {
+    router.push("/");
+  };
+
   return (
     <html
       lang={lang}
@@ -40,7 +44,7 @@ export default function RootLayout({ children, params: { lang } }) {
           >
             {pathName !== `/${lang}` && <span>←</span>}
           </div>
-          <div className="w-auto">
+          <div className="w-auto flex items-center" onClick={goHome}>
             <h1 className="block text-2xl text-white text-center uppercase font-bold">
               {`${lang === "fr" ? "La carte du P'tit Bouchon" : "Le P'tit Bouchon Menu"}`}
             </h1>
